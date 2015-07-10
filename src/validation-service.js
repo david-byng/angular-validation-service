@@ -7,6 +7,8 @@ angular.module(
     .service("Validation", function Validation($injector, isDefined) {
         "use strict";
 
+        var that = this;
+
         function getValidator(type) {
             try {
                 return $injector.get(
@@ -49,7 +51,7 @@ angular.module(
             }
         }
 
-        this.test = function (type, value, context) {
+        that.test = function (type, value, context) {
             if (typeof type !== "string") {
                 throw "Expecting a type";
             }
@@ -60,7 +62,7 @@ angular.module(
             return !(testValidationSet(type, value, context).length);
         };
 
-        this.errors = function (type, value, context) {
+        that.errors = function (type, value, context) {
             if (type === undefined) {
                 throw "Expecting a type";
             }

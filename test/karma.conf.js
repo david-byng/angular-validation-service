@@ -9,6 +9,7 @@ module.exports = function(config) {
       "bower_components/karma-test-helpers/angular.js",
       "node_modules/phantomjs-polyfill/bind-polyfill.js",
       "bower_components/angular-functional-helpers/src/functional-helper.js",
+      "src/validation-service.js",
       "src/**/*.js"
     ],
 
