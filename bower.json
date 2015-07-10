@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-functional-helpers": "1.0.1"
+    "angular-functional-helpers": "~1.0"
   },
   "devDependencies": {
     "angular": "~1.4.2",
