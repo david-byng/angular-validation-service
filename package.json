@@ -1,0 +1,39 @@
+{
+  "name": "angular-validation-service",
+  "version": "1.0.0",
+  "description": "Service+constant based validation helper for angular projects",
+  "main": "src/validation-service.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/david-byng/angular-validation-service.git"
+  },
+  "author": "David Godfrey <david@byng.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/david-byng/angular-validation-service/issues"
+  },
+  "homepage": "https://github.com/david-byng/angular-validation-service#readme",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-karma": "0.0.4",
+    "gulp-shell": "^0.4.2",
+    "gulp-watch": "^4.2.4",
+    "jasmine-core": "^2.3.4",
+    "json": "^9.0.3",
+    "karma": "^0.12.37",
+    "karma-coverage": "^0.4.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "phantomjs": "^1.9.17",
+    "phantomjs-polyfill": "0.0.1",
+    "yargs": "^3.15.0"
+  }
+}
