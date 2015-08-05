@@ -62,6 +62,25 @@ angular.module(
             return !(testValidationSet(type, value, context).length);
         };
 
+        
+        that.transform = function(type, value) {
+            if (typeof type !== "string") {
+                throw "Expecting a type";
+            }
+
+            if (arguments.length < 2) {
+                throw "Expecting a value";
+            }
+
+            var validator = getValidator(type);
+            var func = (
+                    validator.transform ||
+                    function(value) { return value; }
+                );
+
+            return func.call(validator, value);
+        };
+
         that.errors = function (type, value, context) {
             if (type === undefined) {
                 throw "Expecting a type";

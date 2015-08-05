@@ -1,5 +1,6 @@
 describe("byng.module.validation.service.validation", function() {
     var Validation;
+    var VALIDATION_TYPE_TOINT;
 
     beforeEach(function() {
         module(function($provide) {
@@ -27,11 +28,50 @@ describe("byng.module.validation.service.validation", function() {
             $provide.value("VALIDATION_TYPE_INTEGRATED", function() {
                 return [];
             });
+            $provide.value("VALIDATION_TYPE_TOINT", {
+                transform: function(value) {
+                    return parseInt(value);
+                }
+            });
         });
         module("byng.module.validation.service.validation");
 
-        inject(function(_Validation_) {
+        inject(function(_Validation_, _VALIDATION_TYPE_TOINT_) {
             Validation = _Validation_;
+            VALIDATION_TYPE_TOINT = _VALIDATION_TYPE_TOINT_;
+        });
+    });
+
+    describe("transform()", function() {
+        it("should be a function", function() {
+            expect(Validation.transform).toEqual(jasmine.any(Function));
+        });
+
+        it("should expect a type", function() {
+            expect(Validation.transform.bind(Validation)).toThrow("Expecting a type");
+        });
+
+        it("should expect a value", function() {
+            expect(Validation.transform.bind(Validation, "type")).toThrow("Expecting a value");
+        });
+
+        it("should return the value if the validator does not have a transform() function", function() {
+            expect(Validation.transform("fakenumber", 123)).toBe(123);
+        });
+
+        it("should return a transformed value if the validator has a transform() function", function() {
+            expect(Validation.transform("toint", "123")).toBe(123);
+        });
+
+        it("should bind the validator's context into the transform function", function() {
+            VALIDATION_TYPE_TOINT.transform = jasmine.createSpy("transform")
+                .and.callThrough();
+
+            Validation.transform("toint", "123");
+
+            expect(
+                VALIDATION_TYPE_TOINT.transform.calls.mostRecent().object
+            ).toEqual(VALIDATION_TYPE_TOINT);
         });
     });
 
