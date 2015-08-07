@@ -42,7 +42,7 @@ angular.module(
                 return validator(value, context);
             } else {
                 if (validator.test instanceof RegExp) {
-                    return validator.test.test(value) ? undefined : validator.message;
+                    return validator.test.test((value || "")) ? undefined : validator.message;
                 } else if (validator.test instanceof Function) {
                     return validator.test(value, context) ? undefined : validator.message;
                 } else {

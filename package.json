@@ -1,6 +1,6 @@
 {
   "name": "angular-validation-service",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Service+constant based validation helper for angular projects",
   "main": "src/validation-service.js",
   "directories": {

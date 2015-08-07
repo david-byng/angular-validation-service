@@ -8,6 +8,10 @@ describe("byng.module.validation.service.validation", function() {
                 test: /^[0-9]+$/,
                 message: "Must be numerical digits"
             });
+            $provide.value("VALIDATION_TYPE_FAKENOTEMPTY", {
+                test: /^.+$/,
+                message: "Must not be empty"
+            });
             $provide.value("VALIDATION_TYPE_FAKEMATCH", {
                 test: function(value, context) {
                     return value === context;
@@ -122,6 +126,25 @@ describe("byng.module.validation.service.validation", function() {
             expect(result).toEqual(jasmine.any(Array));
         });
 
+        it("should correctly handle null/undefined values when using a regex", function() {
+            var result = Validation.errors("FAKENOTEMPTY", null);
+            expect(result).toEqual(jasmine.any(Array));
+            expect(result.length).toBeGreaterThan(0);
+
+            result = Validation.errors("FAKENOTEMPTY", undefined);
+            expect(result).toEqual(jasmine.any(Array));
+            expect(result.length).toBeGreaterThan(0);
+
+            result = Validation.errors("FAKENOTEMPTY", "");
+            expect(result).toEqual(jasmine.any(Array));
+            expect(result.length).toBeGreaterThan(0);
+
+            result = Validation.errors("FAKENOTEMPTY", "errors");
+            expect(result).toEqual(jasmine.any(Array));
+            expect(result.length).toBe(0);
+
+        });
+
         describe("'throw' handlers", function() {
             it("should be added to error arrays", function() {
                 var result = Validation.errors("FAKEMATCH", "foo", "bar");
@@ -195,6 +218,13 @@ describe("byng.module.validation.service.validation", function() {
 
         it("should handle validation sets with multiple tests", function() {
             expect(Validation.test("MULTIPLE", "abc")).toEqual(true);
+        });
+
+        it("should correctly handle null/undefined values when using a regex", function() {
+            expect(Validation.test("FAKENOTEMPTY", null)).toBe(false);
+            expect(Validation.test("FAKENOTEMPTY", undefined)).toBe(false);
+            expect(Validation.test("FAKENOTEMPTY", "")).toBe(false);
+            expect(Validation.test("FAKENOTEMPTY", "test")).toBe(true);
         });
 
     });
